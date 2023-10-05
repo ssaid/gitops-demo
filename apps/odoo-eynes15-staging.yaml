@@ -30,6 +30,9 @@ spec:
           postgresqlPostgresUser: odoo
           postgresqlPostgresPassword: odoo
           database: bitnami15
+        extraEnvVars:
+          - name: ODOO_DATABASE_FILTER
+            value: "bitnami15"
         ingress:
           enabled: true
           hostname: odoo-15-bitnami.local
