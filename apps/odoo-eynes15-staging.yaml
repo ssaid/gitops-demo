@@ -17,7 +17,7 @@ spec:
         service:
           type: ClusterIP
         image:
-          tag: 15.0.20230910-debian-11-r0
+          tag: 15.0.20230910-debian-11-r19
         postgresql:
           enabled: false
         odooEmail: admin
@@ -32,7 +32,7 @@ spec:
           database: bitnami15
         extraEnvVars:
           - name: ODOO_DATABASE_FILTER
-            value: "bitnami15"
+            value: "^bitnami15$"
         ingress:
           enabled: true
           hostname: odoo-15-bitnami.local
