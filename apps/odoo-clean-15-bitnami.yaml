@@ -27,6 +27,7 @@ spec:
           port: 5432
           postgresqlPostgresUser: odoo
           postgresqlPostgresPassword: odoo
+          database: bitnami15
         # ingress:
         #   enabled: true
         #   hostname: odoo-15-bitnami.zeus.eynes.com.ar
