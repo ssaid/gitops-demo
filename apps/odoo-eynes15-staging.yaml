@@ -20,6 +20,8 @@ spec:
           tag: 15.0.20230910-debian-11-r0
         postgresql:
           enabled: false
+        odooEmail: admin
+        odooPassword: admin
         externalDatabase:
           host: postgresql-15.postgresql-15.svc.cluster.local
           user: odoo
