@@ -9,6 +9,7 @@ spec:
   source:
     chart: odoo
     repoURL: https://github.com/ssaid/charts
+    targetRevision: 23.3.2
     path: bitnami/odoo
     helm:
       releaseName: odoo-15-bitnami
