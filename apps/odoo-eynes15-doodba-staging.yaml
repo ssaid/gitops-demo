@@ -46,6 +46,7 @@ spec:
         args: ['/opt/odoo/common/entrypoint; createdb $PGDATABASE || true; [[ $(psql -d $PGDATABASE -c "\dt"|wc -l) -eq 0 ]] && odoo -d $PGDATABASE -i base --stop-after-init|| echo "Skipping initialization..."; odoo']
 
         doodba: true
+        argocleanup: true
         withoutDemo: true
         listDb: false
         smtpSsl: false
