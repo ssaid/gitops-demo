@@ -1,0 +1,44 @@
+# Odoo 15 from bitnami
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: odoo-15-clean
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: odoo
+    repoURL: https://charts.bitnami.com/bitnami
+    targetRevision: 23.3.2
+    helm:
+      releaseName: odoo-15-bitnami
+      values: |
+        # allowEmptyPassword: true
+        service:
+          type: ClusterIP
+        image:
+          tag: 15.0.20230910-debian-11-r0
+        postgresql:
+          enabled: false
+        externalDatabase:
+          host: postgresql-15.postgresql-15.svc.cluster.local
+          user: odoo
+          password: odoo
+          port: 5432
+          postgresqlPostgresUser: odoo
+          postgresqlPostgresPassword: odoo
+        # ingress:
+        #   enabled: true
+        #   hostname: odoo-15-bitnami.zeus.eynes.com.ar
+        #   tls: true
+        #   annotations:
+        #     cert-manager.io/cluster-issuer: letsencrypt # ClusterIssuer Must Be Available
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: odoo-15-bitnami
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
