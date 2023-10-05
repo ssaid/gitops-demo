@@ -17,7 +17,9 @@ spec:
         service:
           type: ClusterIP
         image:
-          tag: 15.0.20230910-debian-11-r19
+          registry: docker.io
+          repository: eynes/eynes15
+          tag: 1.2.178
         postgresql:
           enabled: false
         odooEmail: admin
@@ -39,6 +41,28 @@ spec:
         #   tls: true
         #   annotations:
         #     cert-manager.io/cluster-issuer: letsencrypt # ClusterIssuer Must Be Available
+
+        command: ['/bin/bash','-c']
+        args: ['/opt/odoo/common/entrypoint; createdb $PGDATABASE || true; [[ $(psql -d $PGDATABASE -c "\dt"|wc -l) -eq 0 ]] && odoo -d $PGDATABASE -i base --stop-after-init|| echo "Skipping initialization..."; odoo']
+
+        doodba: true
+        withoutDemo: true
+        listDb: false
+        smtpSsl: false
+        emailFrom: ""
+        unaccent: false
+        proxy_mode: true
+
+        useBackup:
+          enable: false
+          legacy: false
+          params:
+            AWS_ACCESS_KEY_ID: xxx
+            AWS_SECRET_ACCESS_KEY: xxx
+            DBS_TO_INCLUDE: ^prod
+            DST: boto3+s3://xxx/xxx/
+            PASSPHRASE: xxx
+            TZ: UTC
   destination:
     server: "https://kubernetes.default.svc"
     namespace: odoo-15-doodba
