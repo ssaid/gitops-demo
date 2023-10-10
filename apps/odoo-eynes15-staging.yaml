@@ -36,6 +36,10 @@ spec:
         ingress:
           enabled: true
           hostname: odoo-15-bitnami.local
+        customPostInitScripts:
+          init-database.sh: |
+            #!/bin/bash
+            /opt/bitnami/odoo/bin/odoo --config /opt/bitnami/odoo/conf/odoo.conf --stop-after-init -i sale
         #   tls: true
         #   annotations:
         #     cert-manager.io/cluster-issuer: letsencrypt # ClusterIssuer Must Be Available
